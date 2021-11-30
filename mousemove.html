@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Mouse Move 값 활용하기</title>
+    <style>
+        body {
+            position: relative;
+            background: black;
+            color: #fff;
+        }
+        .cursor-item {
+            position: absolute;
+            left: 0;
+            top: 0;
+            width: 100px;
+            height: 100px;
+            padding: 16px;
+            background: #424242;
+        }
+    </style>
+</head>
+<body>
+<h1>Client Mouse Position</h1>
+<div class="cursor-item"> cursor-item </div>
+<script>
+    // after load
+    window.onload = function () {
+
+        const infoTitle = document.getElementsByTagName('h1')[0];
+        const cursorBox = document.getElementsByClassName('cursor-item')[0];
+
+        window.addEventListener("mousemove", mouseFunc, false);
+
+        function mouseFunc (e) {
+
+            const cursorXPosition = e.clientX;
+            const cursorYPosition = e.clientY;
+
+            infoTitle.innerHTML = 'x: ' + e.clientX + ' y: ' + e.clientY;
+
+            cursorBox.style.transform = "translate("+ cursorXPosition +"px, "+ cursorYPosition + "px)";
+        }
+    }
+
+
+</script>
+</body>
+</html>
