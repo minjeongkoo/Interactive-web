@@ -24,24 +24,40 @@
 <h1>Client Mouse Position</h1>
 <div class="cursor-item"> cursor-item </div>
 <script>
+
+    let cursorXPosition = Number;
+    let cursorYPosition = Number;
+    let mouseX = 0;
+    let mouseY = 0;
+    let moveSpeed = 0.03;
+
     // after load
     window.onload = function () {
 
         const infoTitle = document.getElementsByTagName('h1')[0];
         const cursorBox = document.getElementsByClassName('cursor-item')[0];
 
-        window.addEventListener("mousemove", mouseFunc, false);
+        window.addEventListener("mousemove", mousePositionData, false);
 
-        function mouseFunc (e) {
+        function mousePositionData (event) {
 
-            const cursorXPosition = e.clientX;
-            const cursorYPosition = e.clientY;
+            const eventInfo = event;
 
-            infoTitle.innerHTML = 'x: ' + e.clientX + ' y: ' + e.clientY;
+            cursorXPosition = eventInfo.clientX;
+            cursorYPosition = eventInfo.clientY;
 
-            cursorBox.style.transform = "translate("+ cursorXPosition +"px, "+ cursorYPosition + "px)";
+            mouseX += (cursorXPosition - mouseX) * moveSpeed ;
+            mouseY += (cursorYPosition - mouseY) * moveSpeed ;
+
+
+
+            infoTitle.innerHTML = 'x: ' + cursorXPosition + ' y: ' + cursorYPosition;
+
+            cursorBox.style.transform = "translate("+ mouseX +"px, "+ mouseY + "px)";
+
         }
     }
+
 
 
 </script>
